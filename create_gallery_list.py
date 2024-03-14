@@ -7,5 +7,7 @@ files = [f for f in os.listdir('models') if os.path.isdir(os.path.join('models',
 
 # write to file
 with open('gallery_list.txt', 'w') as f:
-    for file in files:
-        f.write(file + '\n')
+    for i, file in enumerate(files):
+        f.write(file)
+        if i < len(files) - 1:
+            f.write('\n')
