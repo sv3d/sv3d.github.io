@@ -3,10 +3,12 @@
 import os
 
 # get all folders in models/ dir
-files = [f for f in os.listdir('models') if os.path.isdir(os.path.join('models', f))]
+files = [f for f in os.listdir('static/models') if 
+         os.path.isdir(os.path.join('static/models', f)) and 
+         os.path.exists(os.path.join('static/models', f, "model.obj"))]
 
 # write to file
-with open('gallery_list.txt', 'w') as f:
+with open('static/gallery_list.txt', 'w') as f:
     for i, file in enumerate(files):
         f.write(file)
         if i < len(files) - 1:

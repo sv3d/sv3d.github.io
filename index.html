@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SV3D generates novel multi-view synthesis from a single input image.">
+  <meta name="keywords" content="Video Diffusion, 3D Generation, NeRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SV3D: Novel Multi-view Synthesis and 3D Generation from a Single Image using Latent Video Diffusion</title>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:wght@600|Lato:wght@400;700|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/gallery.css"/>
+  <link rel="icon" href="./static/images/favicon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <script src="./static/js/gallery.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SV3D: Novel Multi-view Synthesis and 3D Generation from a Single Image using Latent Video Diffusion</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://voletiv.github.io">Vikram Voleti</a><sup>*</sup>,</span>
+            <span class="author-block">
+              <a href="https://chhankyao.github.io">Chun-Han Yao</a><sup>*</sup>,</span>
+            <span class="author-block">
+              <a href="https://markboss.me">Mark Boss</a><sup>*</sup>,
+            </span>
+            <span class="author-block">
+              Adam Letts,
+            </span>
+            <span class="author-block">
+              David Pankratz,
+            </span>
+            <span class="author-block">
+              <a href="https://twitter.com/cut_pow">Dmitrii Tochilkin</a>,
+            </span>
+            <span class="author-block">
+              <a href="https://twitter.com/chrlaf">Christian Laforte</a>
+            </span>
+            <span class="author-block">
+              <a href="https://twitter.com/robrombach">Robin Rombach</a>
+            </span>
+            <span class="author-block">
+              <a href="https://varunjampani.github.io">Varun Jampani</a>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Stability AI</span>&nbsp;&nbsp;&nbsp;
+            <span class="author-block"><sup>*</sup>Key Technical Contributions</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                  <!-- TODO -->
+                  <a href="https://arxiv.org/pdf/" 
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <!-- TODO -->
+                <a href="https://arxiv.org/abs/"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <!-- TODO -->
+                <a href="https://www.youtube.com/watch?v="
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <!-- TODO -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span> -->
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+                </span> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="sv3d">SV3D</span> turns single images into novel multi-view synthesis and 3D models.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<div id="lightbox" class="modal">
+  <span class="close cursor" onclick="closeModal()">&times;</span>
+  <div class="modal-content"></div> 
+</div>
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-bag">
+          <video poster="" id="bag" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/models/bag/bag.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-astronaut">
+          <video poster="" id="astronaut" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/models/astronaut/astronaut.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-happy-brother">
+          <video poster="" id="happy-brother" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/models/3D_Dollhouse_Happy_Brother/3D_Dollhouse_Happy_Brother.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-horse">
+          <video poster="" id="horse" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/models/Breyer_Horse_Of_The_Year_2015/Breyer_Horse_Of_The_Year_2015.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-koala">
+          <video poster="" id="koala" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/models/koala1/koala1.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-green-doll">
+          <video poster="" id="green-doll" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/models/green_doll/green_doll.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-rhino">
+          <video poster="" id="rhino" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/models/rhino/rhino.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-tv">
+          <video poster="" id="tv" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/models/tv/tv.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present Stable Video 3D (<span class="sv3d">SV3D</span>) - a latent video diffusion model 
+            for high-resolution, image-to-multi-view generation of orbital videos around a 3D object.
+          </p>
+          <p>
+            Recent work on 3D generation propose techniques to adapt 2D generative models for novel view 
+            synthesis (NVS) and 3D optimization. However, these methods have several disadvantages due to 
+            either limited views or inconsistent NVS, thereby affecting the performance of 3D object generation.
+          </p>
+          <p>
+            In this work, we propose <span class="sv3d">SV3D</span> that adapts image-to-video diffusion model for 
+            novel multi-view synthesis and 3D generation, thereby leveraging the generalization and multi-view 
+            consistency of the video models, while further adding explicit camera control for NVS. We also propose 
+            improved 3D optimization techniques to use <span class="sv3d">SV3D</span> and its NVS outputs for 
+            image-to-3D generation. Extensive experimental results on multiple datasets with 2D and 3D metrics as 
+            well as user study demonstrate <span class="sv3d">SV3D</span>'s state-of-the-art performance on 
+            NVS as well as 3D reconstruction compared to prior works.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <!-- TODO -->
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Comparison. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Comparison and Results</h2>
+
+        <!-- NVS -->
+        <h3 class="title is-4">Novel Multi View Synthesis</h3>
+        <div class="content has-text-justified">
+          <p>
+            Comparing our results on novel multi-view synthesis with Stable Zero 123 and Zero123 XL.
+          </p>
+        </div>
+        <div class="interpolation-panel">
+          <div class="is-vcentered columns">
+            <div class="column is-3 has-text-centered interpolation-video-column">
+              <div class="interpolation-image-wrapper" id="SV3D">
+                Loading...
+              </div> 
+              <p><b>SV3D (ours)</b></p>
+            </div>
+            <div class="column is-3  has-text-centered interpolation-video-column">
+              <div class="interpolation-image-wrapper" id="Stable_Zero123">
+                Loading...
+              </div>
+              <p>Stable Zero123</p>
+            </div>
+            <div class="column is-3 has-text-centered interpolation-video-column">
+              <div class="interpolation-image-wrapper" id="Zero123XL">
+                Loading...
+              </div>
+              <p>Zero123 XL</p>
+            </div>
+            <div class="column is-3 has-text-centered interpolation-video-column">
+              <div class="interpolation-image-wrapper" id="GT">
+                Loading...
+              </div>
+              <p>Ground-Truth</p>
+            </div>
+          </div>
+        
+          <input class="slider is-fullwidth is-large is-info"
+            id="interpolation-slider"
+            step="1" min="0" max="100" value="0" type="range">
+        </div>
+        <br/>
+        <!--/ NVS -->
+
+        <!-- 3D -->
+        <h3 class="title is-4">3D Reconstructions</h3>
+        <div class="content has-text-justified">
+          <p>
+            Click on the individual images to view the 3D model.
+          </p>
+        </div>
+        <div class="content has-text-justified">
+          <div class="wrapper">
+          <ul id="gallery-3d"></ul>
+          <ul class="pagination" id="page"></ul>
+          </div>
+        </div>
+        <!--/ 3D -->
+      </div>
+    <!--/ Comparison. -->
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{voleti2024sv3d,
+  author    = {Voleti, Vikram and Yao, Chun-Han and Boss, Mark and Letts, Adam and Pankratz, David and Tochilkin,  Dmitrii and Laforte, Christian and Rombach, Robin and Jampani, Varun},
+  title     = {{SV3D}: Novel Multi-view Synthesis and {3D} Generation from a Single Image using Latent Video Diffusion},
+  journal   = {arXiv},
+  year      = {2024},
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+        <div class="content">
+          <p>
+            This website is based on the template from <a
+              href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -22,9 +22,9 @@
         }
     </style>
 
-    <script src="babylon/babylon.js"></script>
-    <script src="babylon/babylonjs.loaders.min.js"></script>
-    <script src="babylon/babylon.gui.min.js"></script>
+    <script src="./static/babylon/babylon.js"></script>
+    <script src="./static/babylon/babylonjs.loaders.min.js"></script>
+    <script src="./static/babylon/babylon.gui.min.js"></script>
     <script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
 </head>
 
@@ -57,8 +57,8 @@
         BABYLON.OBJFileLoader.COMPUTE_NORMALS = true;
         BABYLON.OBJFileLoader.OPTIMIZE_NORMALS = true;
         BABYLON.OBJFileLoader.OPTIMIZE_WITH_UV = true;
-        baseModelFolder = "models/" + sceneName + "/Phase3/save/it0-export/";
-        baseHdriFolder = "hdris/"
+        baseModelFolder = "./static/models/" + sceneName + "/";
+        baseHdriFolder = "./static/hdris/"
         BABYLON.SceneLoader.Load(baseModelFolder, "model.obj", engine, function (scene) {
             // do something with the scene
             var camera = new BABYLON.ArcRotateCamera("camera1", Math.PI * 0.5, Math.PI / 2, 3.5, BABYLON.Vector3.Zero(), scene);
