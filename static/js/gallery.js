@@ -67,7 +67,7 @@ fetch("./static/gallery_list.txt")
     for (var i = 0; i < total_pages; i++) {
         var li = document.createElement("li");
         var a = document.createElement("a");
-        a.href = "index.html?page=" + i;
+        a.href = "index.html?page=" + i + "#gallery-3d";
         a.innerText = i;
         // Set a to active class if i == page_num
         if (i === page_num){
